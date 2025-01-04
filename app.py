@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import base64
 from io import BytesIO
 from PIL import Image
+import os
 
 app = Flask(__name__)
 
@@ -24,4 +25,7 @@ def save_image():
         return jsonify({"message": "Fehler beim Speichern des Bildes."}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Port für Render oder standardmäßig 5000
+    port = int(os.environ.get("PORT", 5000))
+    # Host auf 0.0.0.0 setzen, um extern erreichbar zu sein
+    app.run(host="0.0.0.0", port=port, debug=True)
