@@ -1,10 +1,15 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import base64
 from io import BytesIO
 from PIL import Image
 import os
 
 app = Flask(__name__)
+
+@app.route("/")
+def index():
+    # Lädt die `index.html`-Datei aus dem `templates`-Ordner
+    return render_template("index.html")
 
 @app.route("/save-image", methods=["POST"])
 def save_image():
